@@ -10,80 +10,65 @@ else{
     return "tijeras";
     }
 }
-
-function getHumanChoice(){
-    const choice = prompt("Elige piedra, papel o tijeras")
-    return choice
-}
-
-function playGame() {
     let humanScore = 0;
     let computerScore = 0;
- function playRound(humanChoice, computerChoice){
-humanChoice = humanChoice.toLowerCase();
+    const resultsDiv = document.querySelector("#results");
+    const scoreDiv = document.querySelector("#score");
+ function playRound(humanChoice){
+humanChoice = humanChoice.toLowerCase(); const computerChoice = getComputerChoice();
 if (humanChoice === computerChoice){
-console.log("¡Empate!")
+resultsDiv.textContent = "¡Empate!";
 }
-
 if (humanChoice === "papel" && computerChoice === "piedra") {
-    console.log("¡Gana el humano!")
+    resultsDiv.textContent = "¡Gana el humano!";
 humanScore++;
 }
 if (humanChoice === "tijeras" && computerChoice === "papel") {
-    console.log("¡Gana el humano!")
+    resultsDiv.textContent = "¡Gana el humano!";
 humanScore++;
 } 
-if (humanChoice === "piedra" && computerChoice === "tijeras"){console.log("Gana el humano")
+if (humanChoice === "piedra" && computerChoice === "tijeras"){
+    resultsDiv.textContent = "¡Gana el humano!";
 humanScore++;}
 if (humanChoice === "piedra" && computerChoice === "papel") {
-    console.log("¡Gana la compu!")
+    resultsDiv.textContent = "¡Gana la compu!";
 computerScore++;
 }
 if (humanChoice === "papel" && computerChoice === "tijeras") {
-    console.log("¡Gana la compu!")
+    resultsDiv.textContent = "¡Gana la compu!";
 computerScore++;
 } 
 if (humanChoice === "tijeras" && computerChoice === "piedra"){
-    console.log("¡Gana la compu!")
+    resultsDiv.textContent = "¡Gana la compu!";
 computerScore++;
 }
+const scoreDiv = document.querySelector("#score");
+scoreDiv.textContent = `Humano: ${humanScore} - Computadora: ${computerScore}`;
+if (humanScore === 5) {
+    resultsDiv.textContent = "¡Ganaste la partida!";
+    piedraButton.disabled = true;
+    papelButton.disabled = true;
+    tijerasButton.disabled = true;
 }
-let humanSelection;
-let computerSelection;
-humanSelection = getHumanChoice();
-computerSelection = getComputerChoice();
-playRound(humanSelection, computerSelection);
-//una vez arriba
-humanSelection = getHumanChoice();
-computerSelection = getComputerChoice();
-
-playRound(humanSelection, computerSelection);
-//segunda partida
-humanSelection = getHumanChoice();
-computerSelection = getComputerChoice();
-
-playRound(humanSelection, computerSelection);
-//tercera partida
-humanSelection = getHumanChoice();
-computerSelection = getComputerChoice();
-
-playRound(humanSelection, computerSelection);
-//cuarta partida
-humanSelection = getHumanChoice();
-computerSelection = getComputerChoice();
-
-playRound(humanSelection, computerSelection);
-//quinta partida
-//aqui asignamos  quien le gana a quien que recibe osea un premio
-//pero noo, en este caso es un mensaje jeje namas
-if (humanScore > computerScore){
-    console.log("Win the Human!!")
-    }
-if (humanScore < computerScore) {
-    console.log("Win the computer")
-}
-if (humanScore === computerScore) {
-    console.log("Draw!! ")
+else if (computerScore === 5) {
+    resultsDiv.textContent = "¡La computadora ganó la partida!";
+    piedraButton.disabled = true;
+    papelButton.disabled = true;
+    tijerasButton.disabled = true;
 }
 }
-playGame()
+//aqui irìa la const score div, pero bueno
+const piedraButton = document.querySelector("#piedra");
+const papelButton = document.querySelector("#papel");
+const tijerasButton = document.querySelector("#tijeras");
+piedraButton.addEventListener("click", () => {
+    playRound("piedra");
+});
+
+papelButton.addEventListener("click", () => {
+    playRound("papel");
+});
+
+tijerasButton.addEventListener("click", () => {
+    playRound("tijeras");
+});
